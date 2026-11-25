@@ -1,0 +1,970 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Catálogo Vadi Store</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap">
+<style>
+/* Layout: cabecera fija con buscador y filtros, luego secciones por categoría con tarjetas de borde ondulado */
+:root{
+  --cream:#fff7f3; --blush:#ffe6ea; --rose:#f16880; --wine:#6e0f2b; --ink:#3a0b19;
+  --mut:#8a5a66; --line:#f3d3da; --card:#ffffff; --wa:#1faf54; --gold:#faf6f4;
+  --display:'Pacifico','Brush Script MT','Segoe Script',cursive; --body:'Poppins',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --cream:#190d12; --blush:#2a1119; --rose:#ff89a2; --wine:#ffd9e1; --ink:#f8e9ec;
+  --mut:#c49aa6; --line:#43202b; --card:#231219; --gold:#2c1820; color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --cream:#190d12; --blush:#2a1119; --rose:#ff89a2; --wine:#ffd9e1; --ink:#f8e9ec;
+  --mut:#c49aa6; --line:#43202b; --card:#231219; --gold:#2c1820; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:40;background:var(--wine)}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:inherit}
+/* ---- cabecera ---- */
+.hero{background:var(--wine);color:#fff7f3}
+.hero .wrap{padding-block:30px 26px;text-align:center}
+.hero h1{font-family:var(--display);font-size:clamp(40px,10vw,66px);line-height:1.08;margin:0;font-weight:400;color:#fff}
+.hero .tag{font-size:13px;letter-spacing:3.5px;text-transform:uppercase;font-weight:600;opacity:.85;margin:0 0 10px}
+.hero p.sub{margin:12px auto 0;max-width:40ch;font-size:15px;opacity:.9}
+.hero .meta{margin-top:16px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;font-size:12.5px}
+.hero .meta span{background:rgba(255,255,255,.14);border-radius:100px;padding:5px 14px;font-weight:500}
+.scallop{height:16px;background:radial-gradient(circle at 10px 16px,var(--cream) 10px,transparent 10.5px) repeat-x;background-size:20px 16px;background-color:var(--wine);margin-bottom:-1px}
+/* ---- barra fija ---- */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:var(--cream);border-bottom:1px solid var(--line)}
+.bar .wrap{padding-block:10px}
+.search{position:relative;display:block}
+.search input{width:100%;font:inherit;font-size:15px;padding:11px 16px 11px 40px;border-radius:100px;border:1.5px solid var(--line);background:var(--card);color:var(--ink)}
+.search input:focus{outline:2px solid var(--rose);outline-offset:1px;border-color:transparent}
+.search svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:16px;height:16px;stroke:var(--mut);fill:none;stroke-width:2}
+.chips{display:flex;gap:7px;overflow-x:auto;padding:9px 0 2px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;font-size:12.5px;font-weight:500;text-decoration:none;padding:6px 14px;border-radius:100px;background:var(--blush);color:var(--wine);white-space:nowrap;border:1px solid transparent}
+.chip.f.on{background:var(--wine);color:#fff}
+.chip.f{cursor:pointer;border-color:var(--line);background:var(--card)}
+.filtros{display:flex;gap:7px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;align-items:center}
+.filtros::-webkit-scrollbar{display:none}
+.filtros b{flex:none;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--mut);font-weight:600;margin-right:2px}
+/* ---- secciones ---- */
+.sec{padding-block:40px 8px;scroll-margin-top:150px}
+.sec-h{text-align:center;max-width:52ch;margin:0 auto 26px}
+.sec-h h2{font-family:var(--display);font-weight:400;color:var(--wine);font-size:clamp(32px,7vw,46px);line-height:1.1;margin:0 0 10px;text-wrap:balance}
+.sec-h p{margin:0;color:var(--mut);font-size:14.5px}
+.sec-count{display:inline-block;margin-top:12px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;color:var(--rose)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(410px,1fr));gap:22px}
+@media(max-width:420px){.grid{grid-template-columns:1fr;gap:16px}}
+/* ---- tarjeta ---- */
+.card{position:relative;min-width:0}
+.frame{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
+.frame path{fill:none;stroke:var(--rose);stroke-width:2.5}
+.card-in{position:relative;background:var(--card);border-radius:22px;padding:18px;display:flex;gap:16px;height:100%;align-items:flex-start}
+@media(max-width:470px){.card-in{flex-direction:column;align-items:stretch}}
+.shot{position:relative;flex:none;width:190px;align-self:center}
+@media(max-width:470px){.shot{width:100%;max-width:290px;margin:0 auto}}
+.shot img{width:100%;height:auto;aspect-ratio:1;object-fit:contain;border-radius:18px;background:var(--gold);padding:10px;display:block}
+.price{position:absolute;left:-14px;top:-14px;background:var(--wine);color:#fff;font-weight:700;font-size:23px;line-height:1;border-radius:50%;width:68px;height:68px;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(110,15,43,.28);z-index:3}
+.price i{font-style:normal;font-size:12px;font-weight:600;margin-right:1px;align-self:center;margin-top:3px}
+.info{flex:1;min-width:0}
+.row-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:7px}
+.badge{font-size:10.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;background:var(--blush);color:var(--wine);border-radius:100px;padding:4px 10px}
+.badge-last{background:var(--rose);color:#fff}
+.badge-out{background:#b8b0b2;color:#fff}
+.badge-ped{background:var(--wine);color:#fff}
+.size{font-size:12px;color:var(--mut);white-space:nowrap}
+.marca{margin:0;font-size:11px;letter-spacing:2.4px;text-transform:uppercase;font-weight:700;color:var(--rose)}
+.info h3{margin:2px 0 11px;font-size:17.5px;line-height:1.22;color:var(--wine);font-weight:600;text-wrap:balance}
+.lbl{margin:0 0 5px;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;color:#fff;background:var(--rose);display:inline-block;padding:3px 10px;border-radius:4px}
+.benes{margin:0 0 12px;padding-left:16px;font-size:13.5px;line-height:1.45}
+.benes li{margin-bottom:3px}
+.benes li::marker{color:var(--rose)}
+.piel{margin:0 0 12px;font-size:13.5px;color:var(--ink)}
+.nota{margin:0 0 12px;font-size:12.5px;color:var(--mut);font-style:italic;border-left:2px solid var(--line);padding-left:9px}
+.wa{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;background:var(--wa);color:#fff;text-decoration:none;font-weight:600;font-size:13.5px;padding:9px 18px;border-radius:100px}
+.wa:hover{filter:brightness(1.07)}
+.wa-i{width:15px;height:15px;background:#fff;display:inline-block;-webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1112 20zm4.4-5.8c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.7 1-.3.2-.5.1a6.5 6.5 0 01-3.2-2.8c-.2-.4.2-.4.6-1.2a.4.4 0 000-.4L9.7 7.9c-.2-.4-.4-.4-.5-.4h-.5a1 1 0 00-.7.3 3 3 0 00-.9 2.2 5.2 5.2 0 001.1 2.7 11.8 11.8 0 004.5 4 5 5 0 002.3.5 2.7 2.7 0 001.8-1.3 2.2 2.2 0 00.2-1.2c-.1-.1-.3-.2-.5-.3z'/></svg>") center/contain no-repeat;mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18a8 8 0 01-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1112 20zm4.4-5.8c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.7 1-.3.2-.5.1a6.5 6.5 0 01-3.2-2.8c-.2-.4.2-.4.6-1.2a.4.4 0 000-.4L9.7 7.9c-.2-.4-.4-.4-.5-.4h-.5a1 1 0 00-.7.3 3 3 0 00-.9 2.2 5.2 5.2 0 001.1 2.7 11.8 11.8 0 004.5 4 5 5 0 002.3.5 2.7 2.7 0 001.8-1.3 2.2 2.2 0 00.2-1.2c-.1-.1-.3-.2-.5-.3z'/></svg>") center/contain no-repeat}
+.wa-ghost{background:transparent;color:var(--wine);border:1.5px solid var(--line)}
+.is-agotado .shot img{filter:grayscale(1);opacity:.55}
+.is-agotado .frame path{stroke:var(--line)}
+.is-agotado .price{background:#b8b0b2;box-shadow:none}
+.is-pedido .frame path{stroke:var(--wine)}
+.is-pedido .card-in{background:var(--blush)}
+.card.hide{display:none}
+.sec.hide{display:none}
+#vacio{display:none;text-align:center;padding:50px 0;color:var(--mut)}
+#vacio.on{display:block}
+/* ---- pie ---- */
+.pie{background:var(--wine);color:#fff7f3;margin-top:46px}
+.pie .wrap{padding-block:38px 44px;text-align:center}
+.pie h2{font-family:var(--display);font-weight:400;font-size:clamp(28px,6vw,40px);margin:0 0 8px;color:#fff}
+.pie p{margin:0 auto 18px;max-width:44ch;opacity:.9;font-size:14.5px}
+.pasos{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:22px 0 26px;text-align:left}
+.paso{flex:1 1 230px;max-width:270px;background:rgba(255,255,255,.1);border-radius:16px;padding:16px 18px}
+.paso b{display:block;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#ffb3c1;margin-bottom:5px}
+.paso span{font-size:14px}
+.pie .wa{font-size:15px;padding:12px 26px}
+.num{margin:14px 0 0;font-size:13.5px;opacity:.85}
+.num b{font-weight:600;letter-spacing:.5px}
+.pie small{display:block;margin-top:22px;opacity:.65;font-size:12px}
+@media (prefers-reduced-motion:no-preference){.card-in{transition:box-shadow .2s}}
+</style>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="tag">Skincare coreano · Perú</p>
+    <h1>Vadi Store</h1>
+    <p class="sub">Todo lo que tengo disponible, con precios y para qué tipo de piel es cada uno.</p>
+    <div class="meta"><span>39 productos</span><span>49 unidades en stock</span><span>Envíos a todo el Perú</span></div>
+  </div>
+</header>
+<div class="scallop"></div>
+
+<div class="bar">
+  <div class="wrap">
+    <label class="search">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="Busca un producto, marca o ingrediente" aria-label="Buscar en el catálogo">
+    </label>
+    <nav class="chips" aria-label="Categorías"><a class="chip" href="#limpiadores">Limpiadores</a><a class="chip" href="#tonicos">Tónicos</a><a class="chip" href="#esencias">Esencias y ampollas</a><a class="chip" href="#serums">Sérums</a><a class="chip" href="#puntuales">Tratamientos puntuales</a><a class="chip" href="#cremas">Cremas</a><a class="chip" href="#contornos">Contornos y shots</a><a class="chip" href="#solares">Protectores solares</a><a class="chip" href="#mascarillas">Mascarillas</a><a class="chip" href="#parches">Parches</a><a class="chip" href="#labios">Labios</a><a class="chip" href="#sets">Sets de prueba</a></nav>
+    <div class="filtros" role="group" aria-label="Filtrar por tipo de piel">
+      <b>Tu piel</b>
+      <button class="chip f on" data-f="">Todas</button>
+      <button class="chip f" data-f="grasa">Grasa</button>
+      <button class="chip f" data-f="mixta">Mixta</button>
+      <button class="chip f" data-f="seca">Seca</button>
+      <button class="chip f" data-f="sensible">Sensible</button>
+      <button class="chip f" data-f="manchitas">Manchitas</button>
+      <button class="chip f" data-f="imperfecciones">Granitos</button>
+      <button class="chip f" data-f="madura">Madura</button>
+    </div>
+  </div>
+</div>
+
+<main class="wrap">
+<section class="sec" id="limpiadores">
+  <header class="sec-h">
+    <h2>Limpiadores</h2>
+    <p>Un buen limpiador es la base de una piel sana. Retira impurezas y restos de protector solar, y prepara tu piel para que el resto de la rutina funcione.</p>
+    <span class="sec-count">4 productos</span>
+  </header>
+  <div class="grid"><article class="card" data-piel="piel mixta, grasa y con tendencia a imperfecciones" data-busca="celimax the real noni acne bubble cleanser piel mixta, grasa y con tendencia a imperfecciones limpia en profundidad sin dejar la piel tirante textura en espuma, muy suave al aplicar ayuda a controlar el exceso de grasa con extracto de noni, que calma la piel apto para uso diario, mañana y noche">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p4.jpg" alt="The Real Noni Acne Bubble Cleanser" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>65</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge badge-last">Última unidad</span><span class="size">155 ml</span></div>
+    <p class="marca">Celimax</p>
+    <h3>The Real Noni Acne Bubble Cleanser</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>Limpia en profundidad sin dejar la piel tirante</li><li>Textura en espuma, muy suave al aplicar</li><li>Ayuda a controlar el exceso de grasa</li><li>Con extracto de noni, que calma la piel</li><li>Apto para uso diario, mañana y noche</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Piel mixta, grasa y con tendencia a imperfecciones</p>
+    
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20Celimax%20The%20Real%20Noni%20Acne%20Bubble%20Cleanser%20%28S/65%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article><article class="card" data-piel="todo tipo de piel" data-busca="dr.melaxin melting cleanser todo tipo de piel retira protector solar y base de maquillaje sale en espuma lista, no hay que frotar con calamina y niacinamida deja la piel limpia y cómoda para todos los tipos de piel">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p14.jpg" alt="Melting Cleanser" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>70</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge badge-last">Última unidad</span><span class="size">150 ml</span></div>
+    <p class="marca">Dr.Melaxin</p>
+    <h3>Melting Cleanser</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>Retira protector solar y base de maquillaje</li><li>Sale en espuma lista, no hay que frotar</li><li>Con calamina y niacinamida</li><li>Deja la piel limpia y cómoda</li><li>Para todos los tipos de piel</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Todo tipo de piel</p>
+    <p class="nota">Ideal como segundo paso de la doble limpieza.</p>
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20Dr.Melaxin%20Melting%20Cleanser%20%28S/70%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article><article class="card" data-piel="piel sensible, mixta y con tendencia a imperfecciones" data-busca="mixsoon centella cleansing foam piel sensible, mixta y con tendencia a imperfecciones espuma suave que limpia sin resecar con centella asiática, que calma la piel ayuda a reducir la sensación de tirantez deja la piel suave después del enjuague apto para uso diario">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p26.jpg" alt="Centella Cleansing Foam" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>55</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge badge-last">Última unidad</span><span class="size">150 ml</span></div>
+    <p class="marca">mixsoon</p>
+    <h3>Centella Cleansing Foam</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>Espuma suave que limpia sin resecar</li><li>Con centella asiática, que calma la piel</li><li>Ayuda a reducir la sensación de tirantez</li><li>Deja la piel suave después del enjuague</li><li>Apto para uso diario</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Piel sensible, mixta y con tendencia a imperfecciones</p>
+    
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20mixsoon%20Centella%20Cleansing%20Foam%20%28S/55%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article><article class="card" data-piel="piel seca, normal y deshidratada" data-busca="round lab birch juice moisturizing cleanser piel seca, normal y deshidratada limpia e hidrata al mismo tiempo con savia de abedul no deja la piel tirante después de lavarla textura cremosa y suave apto para uso diario">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p27.jpg" alt="Birch Juice Moisturizing Cleanser" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>55</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge badge-last">Última unidad</span><span class="size">150 ml</span></div>
+    <p class="marca">Round Lab</p>
+    <h3>Birch Juice Moisturizing Cleanser</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>Limpia e hidrata al mismo tiempo</li><li>Con savia de abedul</li><li>No deja la piel tirante después de lavarla</li><li>Textura cremosa y suave</li><li>Apto para uso diario</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Piel seca, normal y deshidratada</p>
+    
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20Round%20Lab%20Birch%20Juice%20Moisturizing%20Cleanser%20%28S/55%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article></div>
+</section><section class="sec" id="tonicos">
+  <header class="sec-h">
+    <h2>Tónicos</h2>
+    <p>El tónico va después de limpiar: devuelve hidratación, ayuda a equilibrar la piel y hace que lo que viene después se absorba mejor.</p>
+    <span class="sec-count">1 producto</span>
+  </header>
+  <div class="grid"><article class="card" data-piel="todo tipo de piel" data-busca="dr.melaxin peel shot glow white rice toner todo tipo de piel tónico lechoso con agua de salvado de arroz hidrata y suaviza la textura de la piel aporta luminosidad al rostro prepara la piel para el sérum con ceramidas vegetales">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p10.jpg" alt="Peel Shot Glow White Rice Toner" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>80</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge badge-last">Última unidad</span><span class="size">200 ml</span></div>
+    <p class="marca">Dr.Melaxin</p>
+    <h3>Peel Shot Glow White Rice Toner</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>Tónico lechoso con agua de salvado de arroz</li><li>Hidrata y suaviza la textura de la piel</li><li>Aporta luminosidad al rostro</li><li>Prepara la piel para el sérum</li><li>Con ceramidas vegetales</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Todo tipo de piel</p>
+    
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20Dr.Melaxin%20Peel%20Shot%20Glow%20White%20Rice%20Toner%20%28S/80%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article></div>
+</section><section class="sec" id="esencias">
+  <header class="sec-h">
+    <h2>Esencias y ampollas</h2>
+    <p>Más ligeras que un sérum y pensadas para hidratar en capas. Se aplican antes del sérum y dejan la piel suave y preparada.</p>
+    <span class="sec-count">4 productos</span>
+  </header>
+  <div class="grid"><article class="card" data-piel="todo tipo de piel" data-busca="mixsoon bean essence jumbo todo tipo de piel esencia de soya fermentada, el producto estrella de la marca hidrata y suaviza la textura de la piel ayuda a que la piel se sienta más tersa textura ligera, se absorbe rápido se puede usar mañana y noche">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p40.jpg" alt="Bean Essence Jumbo" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>50</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge">Quedan 3</span><span class="size">100 ml</span></div>
+    <p class="marca">mixsoon</p>
+    <h3>Bean Essence Jumbo</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>Esencia de soya fermentada, el producto estrella de la marca</li><li>Hidrata y suaviza la textura de la piel</li><li>Ayuda a que la piel se sienta más tersa</li><li>Textura ligera, se absorbe rápido</li><li>Se puede usar mañana y noche</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Todo tipo de piel</p>
+    <p class="nota">El tamaño jumbo rinde muchísimo.</p>
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20mixsoon%20Bean%20Essence%20Jumbo%20%28S/50%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article><article class="card" data-piel="piel apagada o con tono desigual" data-busca="dr.melaxin cemenrete picotonic shot ampoule piel apagada o con tono desigual ampolla concentrada con complejo de calcio ayuda a unificar el tono de la piel aporta luminosidad textura ligera de rápida absorción se aplica antes de la crema">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p13.jpg" alt="Cemenrete Picotonic Shot Ampoule" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>80</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge badge-last">Última unidad</span><span class="size">30 ml</span></div>
+    <p class="marca">Dr.Melaxin</p>
+    <h3>Cemenrete Picotonic Shot Ampoule</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>Ampolla concentrada con complejo de calcio</li><li>Ayuda a unificar el tono de la piel</li><li>Aporta luminosidad</li><li>Textura ligera de rápida absorción</li><li>Se aplica antes de la crema</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Piel apagada o con tono desigual</p>
+    
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20Dr.Melaxin%20Cemenrete%20Picotonic%20Shot%20Ampoule%20%28S/80%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article><article class="card is-agotado" data-piel="todo tipo de piel, con textura irregular" data-busca="dr.melaxin peel shot exfoliating white rice ampoule todo tipo de piel, con textura irregular exfoliante suave con partículas de arroz ayuda a retirar células muertas mejora la sensación de suavidad de la piel con agua de salvado de arroz y niacinamida aporta luminosidad">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p7.jpg" alt="Peel Shot Exfoliating White Rice Ampoule" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>90</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge badge-out">Agotado</span><span class="size">60 ml</span></div>
+    <p class="marca">Dr.Melaxin</p>
+    <h3>Peel Shot Exfoliating White Rice Ampoule</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>Exfoliante suave con partículas de arroz</li><li>Ayuda a retirar células muertas</li><li>Mejora la sensación de suavidad de la piel</li><li>Con agua de salvado de arroz y niacinamida</li><li>Aporta luminosidad</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Todo tipo de piel, con textura irregular</p>
+    <p class="nota">Ya pedí más: llega nuevo stock en diciembre. Escríbeme para separarlo.</p>
+    <a class="wa wa-ghost" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Vi%20en%20tu%20catalogo%20el%20Dr.Melaxin%20Peel%20Shot%20Exfoliating%20White%20Rice%20Ampoule%20y%20esta%20agotado.%20Me%20lo%20puedes%20traer%20a%20pedido%3F" target="_blank" rel="noopener">Pídemelo</a>
+  </div>
+</div></article><article class="card is-agotado" data-piel="piel mixta y grasa, con poros visibles" data-busca="dr.melaxin peel shot exfoliating black rice ampoule piel mixta y grasa, con poros visibles exfoliante suave con arroz negro ayuda con los puntos negros y la textura deja la piel suave e hidratada con agua de salvado de arroz y niacinamida versión más enfocada en poros que la de arroz blanco">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p8.jpg" alt="Peel Shot Exfoliating Black Rice Ampoule" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>90</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge badge-out">Agotado</span><span class="size">60 ml</span></div>
+    <p class="marca">Dr.Melaxin</p>
+    <h3>Peel Shot Exfoliating Black Rice Ampoule</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>Exfoliante suave con arroz negro</li><li>Ayuda con los puntos negros y la textura</li><li>Deja la piel suave e hidratada</li><li>Con agua de salvado de arroz y niacinamida</li><li>Versión más enfocada en poros que la de arroz blanco</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Piel mixta y grasa, con poros visibles</p>
+    <p class="nota">Ya pedí más: llega nuevo stock en diciembre. Escríbeme para separarlo.</p>
+    <a class="wa wa-ghost" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Vi%20en%20tu%20catalogo%20el%20Dr.Melaxin%20Peel%20Shot%20Exfoliating%20Black%20Rice%20Ampoule%20y%20esta%20agotado.%20Me%20lo%20puedes%20traer%20a%20pedido%3F" target="_blank" rel="noopener">Pídemelo</a>
+  </div>
+</div></article></div>
+</section><section class="sec" id="serums">
+  <header class="sec-h">
+    <h2>Sérums</h2>
+    <p>El sérum concentra los ingredientes activos. Es el paso donde eliges según lo que tu piel necesita: luminosidad, hidratación o textura.</p>
+    <span class="sec-count">8 productos</span>
+  </header>
+  <div class="grid"><article class="card" data-piel="piel con manchitas o tono desigual" data-busca="axis-y dark spot correcting glow serum piel con manchitas o tono desigual con niacinamida 5% ayuda a unificar el tono de la piel aporta luminosidad al rostro con escualano, que retiene la hidratación textura ligera, no deja sensación pegajosa">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p41.jpg" alt="Dark Spot Correcting Glow Serum" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>50</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge badge-last">Última unidad</span><span class="size">50 ml</span></div>
+    <p class="marca">AXIS-Y</p>
+    <h3>Dark Spot Correcting Glow Serum</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>Con niacinamida 5%</li><li>Ayuda a unificar el tono de la piel</li><li>Aporta luminosidad al rostro</li><li>Con escualano, que retiene la hidratación</li><li>Textura ligera, no deja sensación pegajosa</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Piel con manchitas o tono desigual</p>
+    
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20AXIS-Y%20Dark%20Spot%20Correcting%20Glow%20Serum%20%28S/50%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article><article class="card" data-piel="piel madura o ya acostumbrada a retinoides" data-busca="k-secret seoul 1988 serum · retinal liposome 2% piel madura o ya acostumbrada a retinoides con retinal liposomado 2% y ginseng negro ayuda a suavizar líneas finas favorece la renovación de la piel aporta firmeza con el uso constante fórmula pensada para tolerarse mejor">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p38.jpg" alt="Seoul 1988 Serum · Retinal Liposome 2%" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>50</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge">Quedan 2</span><span class="size">30 ml</span></div>
+    <p class="marca">K-SECRET</p>
+    <h3>Seoul 1988 Serum · Retinal Liposome 2%</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>Con retinal liposomado 2% y ginseng negro</li><li>Ayuda a suavizar líneas finas</li><li>Favorece la renovación de la piel</li><li>Aporta firmeza con el uso constante</li><li>Fórmula pensada para tolerarse mejor</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Piel madura o ya acostumbrada a retinoides</p>
+    <p class="nota">Úsalo de noche. De día, siempre protector solar.</p>
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20K-SECRET%20Seoul%201988%20Serum%20%C2%B7%20Retinal%20Liposome%202%25%20%28S/50%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article><article class="card" data-piel="piel madura, seca o deshidratada" data-busca="medicube pdrn pink peptide serum piel madura, seca o deshidratada con pdrn 1% y complejo de 5 péptidos ayuda a mejorar la firmeza de la piel hidrata en profundidad aporta efecto glow uno de los sérums más buscados del momento">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p39.jpg" alt="PDRN Pink Peptide Serum" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>70</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge badge-last">Última unidad</span><span class="size">30 ml</span></div>
+    <p class="marca">medicube</p>
+    <h3>PDRN Pink Peptide Serum</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>Con PDRN 1% y complejo de 5 péptidos</li><li>Ayuda a mejorar la firmeza de la piel</li><li>Hidrata en profundidad</li><li>Aporta efecto glow</li><li>Uno de los sérums más buscados del momento</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Piel madura, seca o deshidratada</p>
+    
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20medicube%20PDRN%20Pink%20Peptide%20Serum%20%28S/70%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article><article class="card" data-piel="piel que busca firmeza" data-busca="haruharu wonder rose pdrn firming serum · retinal 0.1% piel que busca firmeza con pdrn y retinal 0.1% ayuda a mejorar la firmeza y la elasticidad aporta luminosidad natural con extracto de rosa textura ligera">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p36.jpg" alt="Rose PDRN Firming Serum · Retinal 0.1%" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>65</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge badge-last">Última unidad</span><span class="size">30 ml</span></div>
+    <p class="marca">haruharu wonder</p>
+    <h3>Rose PDRN Firming Serum · Retinal 0.1%</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>Con PDRN y retinal 0.1%</li><li>Ayuda a mejorar la firmeza y la elasticidad</li><li>Aporta luminosidad natural</li><li>Con extracto de rosa</li><li>Textura ligera</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Piel que busca firmeza</p>
+    <p class="nota">Úsalo de noche. De día, siempre protector solar.</p>
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20haruharu%20wonder%20Rose%20PDRN%20Firming%20Serum%20%C2%B7%20Retinal%200.1%25%20%28S/65%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article><article class="card" data-piel="piel con textura irregular o poros visibles" data-busca="nineless molecule-clear 5% mandelic acid serum piel con textura irregular o poros visibles exfoliante químico suave con ácido mandélico 5% ayuda a mejorar la textura irregular ayuda a unificar el tono con pantenol y alantoína, que calman nivel de exfoliación equilibrado, para empezar">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p35.jpg" alt="Molecule-Clear 5% Mandelic Acid Serum" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>50</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge badge-last">Última unidad</span><span class="size">30 ml</span></div>
+    <p class="marca">NINELESS</p>
+    <h3>Molecule-Clear 5% Mandelic Acid Serum</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>Exfoliante químico suave con ácido mandélico 5%</li><li>Ayuda a mejorar la textura irregular</li><li>Ayuda a unificar el tono</li><li>Con pantenol y alantoína, que calman</li><li>Nivel de exfoliación equilibrado, para empezar</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Piel con textura irregular o poros visibles</p>
+    <p class="nota">De noche, 2 o 3 veces por semana. De día, protector solar.</p>
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20NINELESS%20Molecule-Clear%205%25%20Mandelic%20Acid%20Serum%20%28S/50%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article><article class="card" data-piel="piel con textura irregular" data-busca="dr.melaxin cemenrete cyano pink spicule serum piel con textura irregular sérum con espículas y vitamina b12 ayuda a renovar la superficie de la piel aporta luminosidad textura ligera de color rosa se aplica antes de la crema">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p15.jpg" alt="Cemenrete Cyano Pink Spicule Serum" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>80</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge badge-last">Última unidad</span><span class="size">30 ml</span></div>
+    <p class="marca">Dr.Melaxin</p>
+    <h3>Cemenrete Cyano Pink Spicule Serum</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>Sérum con espículas y vitamina B12</li><li>Ayuda a renovar la superficie de la piel</li><li>Aporta luminosidad</li><li>Textura ligera de color rosa</li><li>Se aplica antes de la crema</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Piel con textura irregular</p>
+    <p class="nota">Las espículas pueden dar un ligero cosquilleo; empieza poco a poco.</p>
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20Dr.Melaxin%20Cemenrete%20Cyano%20Pink%20Spicule%20Serum%20%28S/80%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article><article class="card" data-piel="todo tipo de piel, sobre todo deshidratada" data-busca="d&#x27;alba white truffle refresh aqua serum todo tipo de piel, sobre todo deshidratada sérum en spray, muy fácil de aplicar hidrata y refresca al instante con trufa blanca se puede usar sobre el maquillaje sensación ligera, nada pegajoso">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p24.jpg" alt="White Truffle Refresh Aqua Serum" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>65</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge badge-last">Última unidad</span><span class="size">100 ml</span></div>
+    <p class="marca">d&#x27;Alba</p>
+    <h3>White Truffle Refresh Aqua Serum</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>Sérum en spray, muy fácil de aplicar</li><li>Hidrata y refresca al instante</li><li>Con trufa blanca</li><li>Se puede usar sobre el maquillaje</li><li>Sensación ligera, nada pegajoso</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Todo tipo de piel, sobre todo deshidratada</p>
+    
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20d%27Alba%20White%20Truffle%20Refresh%20Aqua%20Serum%20%28S/65%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article><article class="card is-agotado" data-piel="piel apagada o con manchitas" data-busca="arencia vitamin c booster shot vitamina c piel apagada o con manchitas complejo de vitamina c 5% con glutatión aporta luminosidad y unifica el tono para rostro y contorno de ojos">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p2.jpg" alt="Vitamin C Booster Shot" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>80</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge badge-out">Agotado</span><span class="size">30 ml</span></div>
+    <p class="marca">Arencia</p>
+    <h3>Vitamin C Booster Shot</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>Complejo de vitamina C 5% con glutatión</li><li>Aporta luminosidad al rostro</li><li>Ayuda a unificar el tono</li><li>Para rostro y contorno de ojos</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Piel apagada o con manchitas</p>
+    
+    <a class="wa wa-ghost" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Vi%20en%20tu%20catalogo%20el%20Arencia%20Vitamin%20C%20Booster%20Shot%20y%20esta%20agotado.%20Me%20lo%20puedes%20traer%20a%20pedido%3F" target="_blank" rel="noopener">Pídemelo</a>
+  </div>
+</div></article></div>
+</section><section class="sec" id="puntuales">
+  <header class="sec-h">
+    <h2>Tratamientos puntuales</h2>
+    <p>No van en todo el rostro: se aplican solo donde los necesitas, sobre una imperfección o una zona concreta.</p>
+    <span class="sec-count">3 productos</span>
+  </header>
+  <div class="grid"><article class="card" data-piel="piel con imperfecciones" data-busca="mary&amp;may spicule azelaic pdrn spot cream piel con imperfecciones crema puntual con ácido azelaico 2% con agua de árbol de té 10% y cica pdrn para aplicar solo sobre la imperfección sin fragancia añadida con espículas 3.000 ppm">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p16.jpg" alt="Spicule Azelaic PDRN Spot Cream" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>50</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge badge-last">Última unidad</span><span class="size">15 g</span></div>
+    <p class="marca">Mary&amp;May</p>
+    <h3>Spicule Azelaic PDRN Spot Cream</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>Crema puntual con ácido azelaico 2%</li><li>Con agua de árbol de té 10% y CICA PDRN</li><li>Para aplicar solo sobre la imperfección</li><li>Sin fragancia añadida</li><li>Con espículas 3.000 ppm</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Piel con imperfecciones</p>
+    <p class="nota">Las espículas pueden dar un ligero cosquilleo.</p>
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20Mary%26May%20Spicule%20Azelaic%20PDRN%20Spot%20Cream%20%28S/50%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article><article class="card" data-piel="piel acostumbrada a retinoides" data-busca="mary&amp;may spicule retinol pdrn cream piel acostumbrada a retinoides con retinol, pantenol 2% y cica pdrn ayuda a suavizar la textura de la piel para zonas concretas, no todo el rostro sin fragancia añadida con espículas 2.000 ppm">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p18.jpg" alt="Spicule Retinol PDRN Cream" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>50</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge">Quedan 3</span><span class="size">15 g</span></div>
+    <p class="marca">Mary&amp;May</p>
+    <h3>Spicule Retinol PDRN Cream</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>Con retinol, pantenol 2% y CICA PDRN</li><li>Ayuda a suavizar la textura de la piel</li><li>Para zonas concretas, no todo el rostro</li><li>Sin fragancia añadida</li><li>Con espículas 2.000 ppm</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Piel acostumbrada a retinoides</p>
+    <p class="nota">Úsala de noche. De día, siempre protector solar.</p>
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20Mary%26May%20Spicule%20Retinol%20PDRN%20Cream%20%28S/50%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article><article class="card" data-piel="piel grasa o mixta con imperfecciones" data-busca="skin1004 madagascar centella tea-trica spot cream piel grasa o mixta con imperfecciones crema puntual con árbol de té y centella ayuda a calmar la zona textura ligera, se absorbe rápido se puede usar bajo el maquillaje para aplicar solo donde lo necesitas">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p11.jpg" alt="Madagascar Centella Tea-Trica Spot Cream" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>50</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge badge-last">Última unidad</span><span class="size">20 ml</span></div>
+    <p class="marca">SKIN1004</p>
+    <h3>Madagascar Centella Tea-Trica Spot Cream</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>Crema puntual con árbol de té y centella</li><li>Ayuda a calmar la zona</li><li>Textura ligera, se absorbe rápido</li><li>Se puede usar bajo el maquillaje</li><li>Para aplicar solo donde lo necesitas</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Piel grasa o mixta con imperfecciones</p>
+    
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20SKIN1004%20Madagascar%20Centella%20Tea-Trica%20Spot%20Cream%20%28S/50%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article></div>
+</section><section class="sec" id="cremas">
+  <header class="sec-h">
+    <h2>Cremas</h2>
+    <p>La crema sella todo lo anterior. Mantiene la hidratación, cuida la barrera de la piel y evita que se sienta tirante durante el día.</p>
+    <span class="sec-count">6 productos</span>
+  </header>
+  <div class="grid"><article class="card" data-piel="todo tipo de piel, incluso sensible" data-busca="dr. althea 345 relief cream todo tipo de piel, incluso sensible la crema más pedida de la marca hidrata y calma la piel ayuda a fortalecer la barrera cutánea con ceramidas, pantenol y centella textura cómoda, para todo tipo de piel">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p1.jpg" alt="345 Relief Cream" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>95</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge">Quedan 2</span><span class="size">50 ml</span></div>
+    <p class="marca">Dr. Althea</p>
+    <h3>345 Relief Cream</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>La crema más pedida de la marca</li><li>Hidrata y calma la piel</li><li>Ayuda a fortalecer la barrera cutánea</li><li>Con ceramidas, pantenol y centella</li><li>Textura cómoda, para todo tipo de piel</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Todo tipo de piel, incluso sensible</p>
+    
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20Dr.%20Althea%20345%20Relief%20Cream%20%28S/95%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article><article class="card" data-piel="piel madura, seca o normal" data-busca="centellian24 madeca cream time reverse zero piel madura, seca o normal de la línea más viral de centellian24 hidrata y cuida la barrera de la piel con centella asiática (teca) y retinal textura rica pero no pesada tamaño grande, rinde mucho">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p34.jpg" alt="Madeca Cream Time Reverse Zero" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>70</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge badge-last">Última unidad</span><span class="size">80 ml</span></div>
+    <p class="marca">Centellian24</p>
+    <h3>Madeca Cream Time Reverse Zero</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>De la línea más viral de Centellian24</li><li>Hidrata y cuida la barrera de la piel</li><li>Con centella asiática (TECA) y retinal</li><li>Textura rica pero no pesada</li><li>Tamaño grande, rinde mucho</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Piel madura, seca o normal</p>
+    
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20Centellian24%20Madeca%20Cream%20Time%20Reverse%20Zero%20%28S/70%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article><article class="card" data-piel="piel sensible, grasa y mixta" data-busca="purito seoul oat-in calming gel cream piel sensible, grasa y mixta gel crema ligero con agua de avena calma la piel y reduce la sensación de ardor hidrata sin sensación pesada refresca al aplicar ideal para clima caluroso">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p19.jpg" alt="Oat-In Calming Gel Cream" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>65</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge badge-last">Última unidad</span><span class="size">100 ml</span></div>
+    <p class="marca">Purito Seoul</p>
+    <h3>Oat-In Calming Gel Cream</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>Gel crema ligero con agua de avena</li><li>Calma la piel y reduce la sensación de ardor</li><li>Hidrata sin sensación pesada</li><li>Refresca al aplicar</li><li>Ideal para clima caluroso</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Piel sensible, grasa y mixta</p>
+    
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20Purito%20Seoul%20Oat-In%20Calming%20Gel%20Cream%20%28S/65%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article><article class="card" data-piel="piel apagada o con tono desigual" data-busca="aplb glutathione niacinamide facial cream piel apagada o con tono desigual con glutatión y niacinamida 24.8% ayuda a unificar el tono de la piel aporta luminosidad hidrata sin apelmazar con centella y colágeno hidrolizado">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p25.jpg" alt="Glutathione Niacinamide Facial Cream" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>50</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge">Quedan 2</span><span class="size">55 ml</span></div>
+    <p class="marca">APLB</p>
+    <h3>Glutathione Niacinamide Facial Cream</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>Con glutatión y niacinamida 24.8%</li><li>Ayuda a unificar el tono de la piel</li><li>Aporta luminosidad</li><li>Hidrata sin apelmazar</li><li>Con centella y colágeno hidrolizado</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Piel apagada o con tono desigual</p>
+    
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20APLB%20Glutathione%20Niacinamide%20Facial%20Cream%20%28S/50%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article><article class="card" data-piel="todo tipo de piel" data-busca="eqqualberry lush blush nad+ peptide boosting cream todo tipo de piel con nad+ y péptidos ayuda a que la piel se sienta más firme hidrata en profundidad textura suave que se absorbe bien para usar mañana y noche">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p29.jpg" alt="Lush Blush NAD+ Peptide Boosting Cream" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>60</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge badge-last">Última unidad</span><span class="size">50 ml</span></div>
+    <p class="marca">Eqqualberry</p>
+    <h3>Lush Blush NAD+ Peptide Boosting Cream</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>Con NAD+ y péptidos</li><li>Ayuda a que la piel se sienta más firme</li><li>Hidrata en profundidad</li><li>Textura suave que se absorbe bien</li><li>Para usar mañana y noche</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Todo tipo de piel</p>
+    
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20Eqqualberry%20Lush%20Blush%20NAD%2B%20Peptide%20Boosting%20Cream%20%28S/60%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article><article class="card" data-piel="todo tipo de piel, incluso sensible" data-busca="epii double up cream nad+ nmn &amp; txa todo tipo de piel, incluso sensible con nad+, nmn y ácido tranexámico ayuda a unificar el tono hidrata y aporta luminosidad textura ligera tipo loción se absorbe rápido">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p28.jpg" alt="Double Up Cream NAD+ NMN &amp; TXA" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>68</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge badge-last">Última unidad</span><span class="size">50 ml</span></div>
+    <p class="marca">epii</p>
+    <h3>Double Up Cream NAD+ NMN &amp; TXA</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>Con NAD+, NMN y ácido tranexámico</li><li>Ayuda a unificar el tono</li><li>Hidrata y aporta luminosidad</li><li>Textura ligera tipo loción</li><li>Se absorbe rápido</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Todo tipo de piel, incluso sensible</p>
+    
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20epii%20Double%20Up%20Cream%20NAD%2B%20NMN%20%26%20TXA%20%28S/68%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article></div>
+</section><section class="sec" id="contornos">
+  <header class="sec-h">
+    <h2>Contornos y shots</h2>
+    <p>La piel alrededor de los ojos es la más fina del rostro. Un contorno la hidrata y la cuida con fórmulas pensadas para esa zona.</p>
+    <span class="sec-count">2 productos</span>
+  </header>
+  <div class="grid"><article class="card" data-piel="contorno con aspecto cansado" data-busca="k-secret seoul 1988 eye cream · retinal liposome 4% contorno con aspecto cansado contorno de ojos con retinal liposomado 4% hidrata la zona del contorno ayuda a suavizar líneas finas con soya fermentada tamaño grande para un contorno">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p12.jpg" alt="Seoul 1988 Eye Cream · Retinal Liposome 4%" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>45</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge badge-last">Última unidad</span><span class="size">30 ml</span></div>
+    <p class="marca">K-SECRET</p>
+    <h3>Seoul 1988 Eye Cream · Retinal Liposome 4%</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>Contorno de ojos con retinal liposomado 4%</li><li>Hidrata la zona del contorno</li><li>Ayuda a suavizar líneas finas</li><li>Con soya fermentada</li><li>Tamaño grande para un contorno</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Contorno con aspecto cansado</p>
+    <p class="nota">Úsalo de noche, un granito de arroz a toques.</p>
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20K-SECRET%20Seoul%201988%20Eye%20Cream%20%C2%B7%20Retinal%20Liposome%204%25%20%28S/45%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article><article class="card" data-piel="contorno con aspecto cansado" data-busca="dr.melaxin cemenrete calcium volume eye patch contorno con aspecto cansado parches de hidrogel para el contorno hidratan y refrescan la zona ayudan a que el contorno se vea más descansado con complejo de calcio prácticos para antes de un evento">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p9.jpg" alt="Cemenrete Calcium Volume Eye Patch" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>60</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge badge-last">Última unidad</span><span class="size">60 parches</span></div>
+    <p class="marca">Dr.Melaxin</p>
+    <h3>Cemenrete Calcium Volume Eye Patch</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>Parches de hidrogel para el contorno</li><li>Hidratan y refrescan la zona</li><li>Ayudan a que el contorno se vea más descansado</li><li>Con complejo de calcio</li><li>Prácticos para antes de un evento</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Contorno con aspecto cansado</p>
+    <p class="nota">Déjalos 15 o 20 minutos.</p>
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20Dr.Melaxin%20Cemenrete%20Calcium%20Volume%20Eye%20Patch%20%28S/60%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article></div>
+</section><section class="sec" id="solares">
+  <header class="sec-h">
+    <h2>Protectores solares</h2>
+    <p>El paso más importante de tu rutina, todos los días. Protege del sol y es lo que mejor cuida tu piel a largo plazo.</p>
+    <span class="sec-count">3 productos</span>
+  </header>
+  <div class="grid"><article class="card" data-piel="todo tipo de piel, incluso sensible" data-busca="skin1004 centella hyalu-cica water-fit sun serum · pack doble todo tipo de piel, incluso sensible fps 50+ pa++++, protección muy alta textura de sérum, muy ligera no deja residuo blanco con centella asiática, que calma dos tubos: te dura el doble">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p5.jpg" alt="Centella Hyalu-Cica Water-Fit Sun Serum · Pack doble" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>100</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge">Quedan 3</span><span class="size">2 × 50 ml</span></div>
+    <p class="marca">SKIN1004</p>
+    <h3>Centella Hyalu-Cica Water-Fit Sun Serum · Pack doble</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>FPS 50+ PA++++, protección muy alta</li><li>Textura de sérum, muy ligera</li><li>No deja residuo blanco</li><li>Con centella asiática, que calma</li><li>Dos tubos: te dura el doble</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Todo tipo de piel, incluso sensible</p>
+    <p class="nota">Sale a S/50 cada tubo.</p>
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20SKIN1004%20Centella%20Hyalu-Cica%20Water-Fit%20Sun%20Serum%20%C2%B7%20Pack%20doble%20%28S/100%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article><article class="card" data-piel="piel seca y normal" data-busca="haruharu wonder black rice moisture airyfit daily sunscreen piel seca y normal fps 50+ pa++++, protección muy alta acabado aterciopelado, nada grasoso hidrata mientras protege con arroz negro fermentado se puede usar bajo el maquillaje">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p6.jpg" alt="Black Rice Moisture Airyfit Daily Sunscreen" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>60</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge badge-last">Última unidad</span><span class="size">50 ml</span></div>
+    <p class="marca">haruharu wonder</p>
+    <h3>Black Rice Moisture Airyfit Daily Sunscreen</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>FPS 50+ PA++++, protección muy alta</li><li>Acabado aterciopelado, nada grasoso</li><li>Hidrata mientras protege</li><li>Con arroz negro fermentado</li><li>Se puede usar bajo el maquillaje</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Piel seca y normal</p>
+    
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20haruharu%20wonder%20Black%20Rice%20Moisture%20Airyfit%20Daily%20Sunscreen%20%28S/60%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article><article class="card" data-piel="piel mixta y grasa" data-busca="tage cica-tree water jelly sun serum piel mixta y grasa fps 50+ pa++++, protección muy alta textura jelly, se siente casi como agua no deja sensación pesada con árbol de té y centella ideal para clima caluroso">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p21.jpg" alt="Cica-Tree Water Jelly Sun Serum" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>50</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge badge-last">Última unidad</span><span class="size">50 ml</span></div>
+    <p class="marca">Tage</p>
+    <h3>Cica-Tree Water Jelly Sun Serum</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>FPS 50+ PA++++, protección muy alta</li><li>Textura jelly, se siente casi como agua</li><li>No deja sensación pesada</li><li>Con árbol de té y centella</li><li>Ideal para clima caluroso</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Piel mixta y grasa</p>
+    
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20Tage%20Cica-Tree%20Water%20Jelly%20Sun%20Serum%20%28S/50%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article></div>
+</section><section class="sec" id="mascarillas">
+  <header class="sec-h">
+    <h2>Mascarillas</h2>
+    <p>Un extra de hidratación para una noche de autocuidado o antes de un evento. 15 o 20 minutos y listo.</p>
+    <span class="sec-count">4 productos</span>
+  </header>
+  <div class="grid"><article class="card" data-piel="piel apagada" data-busca="aplb glutathione niacinamide sheet mask piel apagada con glutatión y niacinamida 13.7% aporta luminosidad al instante hidrata en profundidad lámina que se adhiere bien al rostro ideal antes de un evento">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p33.jpg" alt="Glutathione Niacinamide Sheet Mask" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>5</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge badge-last">Última unidad</span><span class="size">25 ml</span></div>
+    <p class="marca">APLB</p>
+    <h3>Glutathione Niacinamide Sheet Mask</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>Con glutatión y niacinamida 13.7%</li><li>Aporta luminosidad al instante</li><li>Hidrata en profundidad</li><li>Lámina que se adhiere bien al rostro</li><li>Ideal antes de un evento</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Piel apagada</p>
+    
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20APLB%20Glutathione%20Niacinamide%20Sheet%20Mask%20%28S/5%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article><article class="card" data-piel="piel con manchitas o tono desigual" data-busca="aplb tranexamic acid niacinamide sheet mask piel con manchitas o tono desigual con ácido tranexámico y niacinamida 17.2% ayuda a unificar el tono hidrata en profundidad con agua de centella asiática efecto inmediato de piel descansada">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p30.jpg" alt="Tranexamic Acid Niacinamide Sheet Mask" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>5</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge badge-last">Última unidad</span><span class="size">25 ml</span></div>
+    <p class="marca">APLB</p>
+    <h3>Tranexamic Acid Niacinamide Sheet Mask</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>Con ácido tranexámico y niacinamida 17.2%</li><li>Ayuda a unificar el tono</li><li>Hidrata en profundidad</li><li>Con agua de centella asiática</li><li>Efecto inmediato de piel descansada</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Piel con manchitas o tono desigual</p>
+    
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20APLB%20Tranexamic%20Acid%20Niacinamide%20Sheet%20Mask%20%28S/5%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article><article class="card" data-piel="todo tipo de piel" data-busca="aplb collagen egf peptide sheet mask todo tipo de piel con colágeno y péptido egf 18.3% ayuda a que la piel se vea más firme hidrata en profundidad fórmula vegana ideal para una noche de autocuidado">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p31.jpg" alt="Collagen EGF Peptide Sheet Mask" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>5</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge badge-last">Última unidad</span><span class="size">25 ml</span></div>
+    <p class="marca">APLB</p>
+    <h3>Collagen EGF Peptide Sheet Mask</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>Con colágeno y péptido EGF 18.3%</li><li>Ayuda a que la piel se vea más firme</li><li>Hidrata en profundidad</li><li>Fórmula vegana</li><li>Ideal para una noche de autocuidado</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Todo tipo de piel</p>
+    
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20APLB%20Collagen%20EGF%20Peptide%20Sheet%20Mask%20%28S/5%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article><article class="card" data-piel="piel apagada o con textura irregular" data-busca="aplb retinol vitamin c vitamin e sheet mask piel apagada o con textura irregular con retinol y vitaminas c y e 10.5% aporta luminosidad hidrata en profundidad ayuda a suavizar la textura con agua de centella asiática">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p32.jpg" alt="Retinol Vitamin C Vitamin E Sheet Mask" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>5</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge badge-last">Última unidad</span><span class="size">25 ml</span></div>
+    <p class="marca">APLB</p>
+    <h3>Retinol Vitamin C Vitamin E Sheet Mask</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>Con retinol y vitaminas C y E 10.5%</li><li>Aporta luminosidad</li><li>Hidrata en profundidad</li><li>Ayuda a suavizar la textura</li><li>Con agua de centella asiática</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Piel apagada o con textura irregular</p>
+    
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20APLB%20Retinol%20Vitamin%20C%20Vitamin%20E%20Sheet%20Mask%20%28S/5%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article></div>
+</section><section class="sec" id="parches">
+  <header class="sec-h">
+    <h2>Parches</h2>
+    <p>Cubren y protegen el granito para que no lo toques y no se note. El truco más práctico del skincare coreano.</p>
+    <span class="sec-count">2 productos</span>
+  </header>
+  <div class="grid"><article class="card" data-piel="todo tipo de piel" data-busca="skin1004 madagascar centella spot cover patch todo tipo de piel parches hidrocoloides que cubren el granito ayudan a que no lo toques y no se note muy finos, se pueden usar de día fáciles de retirar el más vendido de la tienda">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p20.jpg" alt="Madagascar Centella Spot Cover Patch" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>10</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge">5 disponibles</span><span class="size">22 parches</span></div>
+    <p class="marca">SKIN1004</p>
+    <h3>Madagascar Centella Spot Cover Patch</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>Parches hidrocoloides que cubren el granito</li><li>Ayudan a que no lo toques y no se note</li><li>Muy finos, se pueden usar de día</li><li>Fáciles de retirar</li><li>El más vendido de la tienda</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Todo tipo de piel</p>
+    <p class="nota">Aplícalos sobre la piel limpia y seca.</p>
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20SKIN1004%20Madagascar%20Centella%20Spot%20Cover%20Patch%20%28S/10%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article><article class="card" data-piel="todo tipo de piel" data-busca="skinfood cica clear spot patch todo tipo de piel 110 parches en dos tamaños: 10 y 12 mm hidrocoloide, muy finos cubren y protegen la imperfección rinden muchísimo por el precio prácticos para llevar en la cartera">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p23.jpg" alt="Cica Clear Spot Patch" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>22</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge badge-last">Última unidad</span><span class="size">110 parches</span></div>
+    <p class="marca">SKINFOOD</p>
+    <h3>Cica Clear Spot Patch</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>110 parches en dos tamaños: 10 y 12 mm</li><li>Hidrocoloide, muy finos</li><li>Cubren y protegen la imperfección</li><li>Rinden muchísimo por el precio</li><li>Prácticos para llevar en la cartera</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Todo tipo de piel</p>
+    
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20SKINFOOD%20Cica%20Clear%20Spot%20Patch%20%28S/22%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article></div>
+</section><section class="sec" id="labios">
+  <header class="sec-h">
+    <h2>Labios</h2>
+    <p>Los labios también son piel: se deshidratan y se resecan. Un buen tratamiento los mantiene suaves.</p>
+    <span class="sec-count">1 producto</span>
+  </header>
+  <div class="grid"><article class="card" data-piel="labios secos o agrietados" data-busca="cnp laboratory propolis lipcerin labios secos o agrietados tratamiento de labios con propóleo hidrata y suaviza los labios resecos textura brillante, no pegajosa se puede usar sobre el labial práctico para llevar siempre">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p45.jpg" alt="Propolis Lipcerin" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>20</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge badge-last">Última unidad</span><span class="size">15 ml</span></div>
+    <p class="marca">CNP Laboratory</p>
+    <h3>Propolis Lipcerin</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>Tratamiento de labios con propóleo</li><li>Hidrata y suaviza los labios resecos</li><li>Textura brillante, no pegajosa</li><li>Se puede usar sobre el labial</li><li>Práctico para llevar siempre</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Labios secos o agrietados</p>
+    
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20CNP%20Laboratory%20Propolis%20Lipcerin%20%28S/20%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article></div>
+</section><section class="sec" id="sets">
+  <header class="sec-h">
+    <h2>Sets de prueba</h2>
+    <p>Tamaños pequeños para conocer una línea completa sin comprar los productos grandes.</p>
+    <span class="sec-count">1 producto</span>
+  </header>
+  <div class="grid"><article class="card" data-piel="quien recién empieza con skincare coreano" data-busca="celimax the real noni starter kit quien recién empieza con skincare coreano set de prueba con tónico, ampolla y crema tamaños pequeños, ideales para viajar para conocer la línea noni completa con extracto de noni, que calma la forma más fácil de empezar una rutina">
+<svg class="frame" preserveAspectRatio="none" aria-hidden="true"><path/></svg>
+<div class="card-in">
+  <div class="shot"><img src="img/p37.jpg" alt="The Real Noni Starter Kit" loading="lazy" width="700" height="700">
+    <span class="price"><i>S/</i>55</span>
+  </div>
+  <div class="info">
+    <div class="row-top"><span class="badge badge-last">Última unidad</span><span class="size">3 productos</span></div>
+    <p class="marca">Celimax</p>
+    <h3>The Real Noni Starter Kit</h3>
+    <p class="lbl">Beneficios</p>
+    <ul class="benes"><li>Set de prueba con tónico, ampolla y crema</li><li>Tamaños pequeños, ideales para viajar</li><li>Para conocer la línea Noni completa</li><li>Con extracto de noni, que calma</li><li>La forma más fácil de empezar una rutina</li></ul>
+    <p class="lbl">Tipo de piel</p>
+    <p class="piel">Quien recién empieza con skincare coreano</p>
+    
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Me%20interesa%20el%20Celimax%20The%20Real%20Noni%20Starter%20Kit%20%28S/55%29.%20Sigue%20disponible%3F" target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Lo quiero</a>
+  </div>
+</div></article></div>
+</section>
+<p id="vacio">No encontré nada con eso. Prueba con otra palabra o escríbeme y lo busco por ti.</p>
+</main>
+
+<footer class="pie">
+  <div class="wrap">
+    <h2>¿Cómo pido el mío?</h2>
+    <p>Escríbeme por WhatsApp con el producto que quieres. Te confirmo stock y te lo aparto.</p>
+    <div class="pasos">
+      <div class="paso"><b>Paso 1</b><span>Me escribes con el nombre del producto que te interesa.</span></div>
+      <div class="paso"><b>Paso 2</b><span>Te confirmo que está disponible y coordinamos el pago.</span></div>
+      <div class="paso"><b>Paso 3</b><span>Te lo envío a cualquier parte del Perú.</span></div>
+    </div>
+    <a class="wa" href="https://wa.me/51902949061?text=Hola%20Marcela%21%20Vi%20tu%20catalogo%20y%20quiero%20hacer%20un%20pedido." target="_blank" rel="noopener"><span class="wa-i" aria-hidden="true"></span>Escríbeme por WhatsApp</a>
+    <p class="num">o guarda mi número: <b>902 949 061</b></p>
+    <small>Productos 100 % originales · ¿Buscas algo que no está aquí? Te lo traigo a pedido · @vadistore21</small>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // marco ondulado dibujado a medida de cada tarjeta
+  var W=15, A=3.2, R=20;
+  function wave(w,h){
+    var p=[], x, y, i, n, seg;
+    function run(len,fn){ n=Math.max(2,Math.round(len/W)); seg=len/n;
+      for(i=0;i<n;i++){ fn(i*seg+seg/2, seg, i%2?-A:A); } return n; }
+    p.push('M '+R+' 2');
+    run(w-2*R, function(c,s,a){ p.push('q '+(s/2)+' '+(a*2)+' '+s+' 0'); });
+    p.push('a '+R+' '+R+' 0 0 1 '+R+' '+R);
+    run(h-2*R, function(c,s,a){ p.push('q '+(a*2)+' '+(s/2)+' 0 '+s); });
+    p.push('a '+R+' '+R+' 0 0 1 -'+R+' '+R);
+    run(w-2*R, function(c,s,a){ p.push('q -'+(s/2)+' '+(a*2)+' -'+s+' 0'); });
+    p.push('a '+R+' '+R+' 0 0 1 -'+R+' -'+R);
+    run(h-2*R, function(c,s,a){ p.push('q '+(a*2)+' -'+(s/2)+' 0 -'+s); });
+    p.push('a '+R+' '+R+' 0 0 1 '+R+' -'+R+' Z');
+    return p.join(' ');
+  }
+  function draw(c){
+    var r=c.getBoundingClientRect(); if(!r.width) return;
+    var s=c.querySelector('.frame'), w=Math.round(r.width), h=Math.round(r.height);
+    s.setAttribute('viewBox','0 0 '+w+' '+h);
+    s.querySelector('path').setAttribute('d', wave(w-4,h-4));
+    s.style.padding='2px';
+  }
+  var cards=[].slice.call(document.querySelectorAll('.card'));
+  function all(){ cards.forEach(draw); }
+  if(window.ResizeObserver){ var ro=new ResizeObserver(function(es){ es.forEach(function(x){draw(x.target);}); });
+    cards.forEach(function(c){ro.observe(c);}); }
+  else { all(); window.addEventListener('resize', all); }
+  window.addEventListener('load', all);
+  document.fonts && document.fonts.ready.then(all);
+
+  // buscador y filtro
+  var q=document.getElementById('q'), f='', vacio=document.getElementById('vacio');
+  function apply(){
+    var t=(q.value||'').trim().toLowerCase(), vis=0;
+    cards.forEach(function(c){
+      var ok=(!t||c.dataset.busca.indexOf(t)>-1)&&(!f||c.dataset.piel.indexOf(f)>-1);
+      c.classList.toggle('hide',!ok); if(ok)vis++;
+    });
+    document.querySelectorAll('.sec').forEach(function(s){
+      s.classList.toggle('hide', !s.querySelector('.card:not(.hide)'));
+    });
+    vacio.classList.toggle('on', vis===0);
+    setTimeout(all,0);
+  }
+  q.addEventListener('input', apply);
+  document.querySelectorAll('.chip.f').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('.chip.f').forEach(function(x){x.classList.remove('on');});
+      b.classList.add('on'); f=b.dataset.f; apply();
+    });
+  });
+})();
+</script>
+</body></html>
